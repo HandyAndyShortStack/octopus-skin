@@ -1,9 +1,7 @@
-window.OctopusSkin = Object.create(null);
-
 (function() {
 
-  var height = 700;
-  var width = height;
+  var height = OctopusSkin.height;
+  var width = OctopusSkin.width;
 
   var svg = d3.select('.svg')
       .append('svg')
@@ -12,10 +10,5 @@ window.OctopusSkin = Object.create(null);
     .append("g")
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-  svg.append('circle')
-      .attr('cx', 0)
-      .attr('cy', 0)
-      .attr('r', 200)
-      .attr('fill', 'red');
-
+  OctopusSkin.dot(svg);
 })();
