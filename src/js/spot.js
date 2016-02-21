@@ -1,21 +1,40 @@
 (function() {
 
-  var radius = OctopusSkin.width / 10;
-  var segments = 12;
-  var distortionRange = radius / 4;
+  window.OctopusSkin.spot = spot;
 
-  var controlShortSide = (4 / 3) * Math.tan(Math.PI / (2 * segments)) * radius;
-  var controlRadius = Math.pow(Math.pow(controlShortSide, 2) + Math.pow(radius, 2), 0.5);
-  var controlAngle = Math.asin(controlShortSide / controlRadius);
+  var defaults = {
+    radius: 20,
+    segments: 12,
+    distortionCoefficient: 0.1
+  };
 
-  var segmentAngle = (2 * Math.PI) / segments;
+  function spot(svg, config) {
 
-  window.OctopusSkin.dot = function(svg) {
+    if (typeof config === 'undefined') {
+      config = {};
+    }
+
+    for (var key in defaults) {
+      if (Object.prototype.hasOwnProperty.call(defaults, key) &&
+          typeof config[key] === 'undefined') {
+        config[key] = defaults[key];
+      }
+    }
+
+    var radius = config.radius;
+    var segments = config.segments;
+
+    var distortionRange = radius * config.distortionCoefficient;
+    var controlShortSide = (4 / 3) * Math.tan(Math.PI / (2 * segments)) * radius;
+    var controlRadius = Math.pow(Math.pow(controlShortSide, 2) + Math.pow(radius, 2), 0.5);
+    var controlAngle = Math.asin(controlShortSide / controlRadius);
+
+    var segmentAngle = (2 * Math.PI) / segments;
 
     var points = [];
     for (var i = 0; i < segments; i += 1) {
       var pointAngle = segmentAngle * i;
-      var dv = distortionVector();
+      var dv = distortionVector(distortionRange);
 
       var point = sumPoints(polarToCart(radius, pointAngle), dv);
 
@@ -42,7 +61,7 @@
         .attr('stroke', 'black')
         .attr('fill', 'transparent')
         .attr('d', path);
-  };
+  }
 
   function polarToCart(distance, angle) {
     var x = Math.cos(angle) * distance;
@@ -53,10 +72,10 @@
     };
   }
 
-  function distortionVector() {
+  function distortionVector(range) {
     return {
-      x: (Math.random() * distortionRange) - (distortionRange / 2),
-      y: (Math.random() * distortionRange) - (distortionRange / 2)
+      x: (Math.random() * range) - (range / 2),
+      y: (Math.random() * range) - (range / 2)
     };
   }
 
