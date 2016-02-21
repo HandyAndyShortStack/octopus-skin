@@ -76,8 +76,9 @@
     }
 
     return spotLocations.map(function(location) {
-      return OctopusSkin.spot(svg)
-          .attr('transform', 'translate(' + location.x + ' ' + location.y + ')');
+      var spot = OctopusSkin.spot(svg)
+      spot.el.attr('transform', 'translate(' + location.x + ' ' + location.y + ')');
+      return spot;
     });
   }
 
