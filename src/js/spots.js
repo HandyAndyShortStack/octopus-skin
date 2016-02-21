@@ -75,11 +75,17 @@
       }
     }
 
-    return spotLocations.map(function(location) {
+    var arr = spotLocations.map(function(location) {
       var spot = OctopusSkin.spot(svg)
       spot.el.attr('transform', 'translate(' + location.x + ' ' + location.y + ')');
       return spot;
     });
+
+    return {
+      svg: svg,
+      arr: arr,
+      setColor: setColor.bind(null, arr)
+    }
   }
 
   function findCell(gridWidth, point, minX, minY) {
@@ -160,5 +166,11 @@
     var vert = Math.abs(a.y - b.y);
     var hyp = Math.pow(Math.pow(horiz, 2) + Math.pow(vert, 2), 0.5);
     return radius > hyp;
+  }
+
+  function setColor(arr, color) {
+    return arr.map(function(spot) {
+      return spot.setColor(color);
+    });
   }
 })();

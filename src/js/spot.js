@@ -51,7 +51,8 @@
 
     return {
       el: el,
-      resize: resize.bind(null, el, points, segments)
+      resize: resize.bind(null, el, points, segments),
+      setColor: setColor.bind(null, el)
     };
   }
 
@@ -125,5 +126,9 @@
 
   function resize(el, points, segments, size) {
     return el.attr('d', getPath(points, segments, size));
+  }
+
+  function setColor(el, color) {
+    return el.attr('fill', color);
   }
 })();

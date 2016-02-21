@@ -1,7 +1,7 @@
 (function() {
   window.OctopusSkin = {
-    height: 700,
-    width: 700,
+    height: window.innerHeight,
+    width: window.innerWidth,
     spotRadius: 30,
     minSpotDistance: 80
   };
