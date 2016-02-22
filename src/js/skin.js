@@ -12,11 +12,15 @@
         .attr('width', OctopusSkin.width)
         .attr('height', OctopusSkin.height)
         .attr('stroke-width', 0)
-        .attr('fill', color.hex);
 
     return({
       el: el,
-      color: color
+      color: color,
+      setColor: setColor.bind(null, el)
     });
   };
+
+  function setColor(el, color) {
+    el.attr('fill', color.hex);
+  }
 })();

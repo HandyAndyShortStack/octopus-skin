@@ -52,7 +52,8 @@
     return {
       el: el,
       resize: resize.bind(null, el, points, segments),
-      setColor: setColor.bind(null, el)
+      setColor: setColor.bind(null, el),
+      setStrokeWidth: setStrokeWidth.bind(null, el)
     };
   }
 
@@ -129,6 +130,10 @@
   }
 
   function setColor(el, color) {
-    return el.attr('fill', color);
+    return el.attr('fill', color.hex);
+  }
+
+  function setStrokeWidth(el, width) {
+    return el.attr('stroke-width', width);
   }
 })();

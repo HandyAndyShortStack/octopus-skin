@@ -84,7 +84,9 @@
     return {
       svg: svg,
       arr: arr,
-      setColor: setColor.bind(null, arr)
+      setColor: setColor.bind(null, arr),
+      setSize: setSize.bind(null, arr),
+      setStrokeWidth: setStrokeWidth.bind(null, arr)
     }
   }
 
@@ -173,4 +175,16 @@
       return spot.setColor(color);
     });
   }
+
+  function setSize(arr, size) {
+    return arr.map(function(spot) {
+      return spot.resize(size);
+    });
+  };
+
+  function setStrokeWidth(arr, width) {
+    return arr.map(function(spot) {
+      return spot.setStrokeWidth(width);
+    });
+  };
 })();
