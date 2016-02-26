@@ -77,18 +77,15 @@
 
     var arr = spotLocations.map(function(location) {
       var spot = OctopusSkin.spot(svg)
-      spot.el.attr('transform', 'translate(' + location.x + ' ' + location.y + ')');
+      spot.attr('transform', 'translate(' + location.x + ' ' + location.y + ')');
       return spot;
     });
 
-    return {
-      svg: svg,
-      arr: arr,
-      setColor: setColor.bind(null, arr),
-      setSize: setSize.bind(null, arr),
-      setStrokeWidth: setStrokeWidth.bind(null, arr),
-      setStrokeColor: setStrokeColor.bind(null, arr)
-    }
+    var el = d3.selectAll(arr.map(function(spot) {
+      return spot[0][0];
+    }));
+
+    return el;
   }
 
   function findCell(gridWidth, point, minX, minY) {
@@ -102,6 +99,22 @@
     return [
       getCell(grid, {
         x: point.x - 1,
+        y: point.y - 2
+      }),
+      getCell(grid, {
+        x: point.x,
+        y: point.y - 2
+      }),
+      getCell(grid, {
+        x: point.x + 1,
+        y: point.y - 2
+      }),
+      getCell(grid, {
+        x: point.x - 2,
+        y: point.y - 1
+      }),
+      getCell(grid, {
+        x: point.x - 1,
         y: point.y - 1
       }),
       getCell(grid, {
@@ -113,12 +126,28 @@
         y: point.y - 1
       }),
       getCell(grid, {
+        x: point.x + 2,
+        y: point.y - 1
+      }),
+      getCell(grid, {
+        x: point.x - 2,
+        y: point.y
+      }),
+      getCell(grid, {
         x: point.x - 1,
         y: point.y
       }),
       getCell(grid, {
         x: point.x + 1,
         y: point.y
+      }),
+      getCell(grid, {
+        x: point.x + 2,
+        y: point.y
+      }),
+      getCell(grid, {
+        x: point.x - 2,
+        y: point.y + 1
       }),
       getCell(grid, {
         x: point.x - 1,
@@ -131,6 +160,22 @@
       getCell(grid, {
         x: point.x + 1,
         y: point.y + 1
+      }),
+      getCell(grid, {
+        x: point.x + 2,
+        y: point.y + 1
+      }),
+      getCell(grid, {
+        x: point.x - 1,
+        y: point.y + 2
+      }),
+      getCell(grid, {
+        x: point.x,
+        y: point.y + 2
+      }),
+      getCell(grid, {
+        x: point.x + 1,
+        y: point.y + 2
       })
     ];
   }
@@ -170,28 +215,4 @@
     var hyp = Math.pow(Math.pow(horiz, 2) + Math.pow(vert, 2), 0.5);
     return radius > hyp;
   }
-
-  function setColor(arr, color) {
-    return arr.map(function(spot) {
-      return spot.setColor(color);
-    });
-  }
-
-  function setSize(arr, size) {
-    return arr.map(function(spot) {
-      return spot.resize(size);
-    });
-  };
-
-  function setStrokeWidth(arr, width) {
-    return arr.map(function(spot) {
-      return spot.setStrokeWidth(width);
-    });
-  };
-
-  function setStrokeColor(arr, color) {
-    return arr.map(function(spot) {
-      return spot.setStrokeColor(color);
-    });
-  };
 })();

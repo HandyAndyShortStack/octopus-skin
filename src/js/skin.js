@@ -9,15 +9,8 @@
         .attr('y', 0 - (OctopusSkin.height / 2))
         .attr('width', OctopusSkin.width)
         .attr('height', OctopusSkin.height)
-        .attr('stroke-width', 0)
+        .attr('stroke-width', 0);
 
-    return({
-      el: el,
-      setColor: setColor.bind(null, el)
-    });
+    return el;
   };
-
-  function setColor(el, color) {
-    el.attr('fill', color.hex);
-  }
 })();

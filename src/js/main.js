@@ -10,12 +10,12 @@
     .append("g")
       .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-  var skin = OctopusSkin.skin(svg);
-  var spots = OctopusSkin.spots(svg);
+  window.skin = OctopusSkin.skin(svg);
+  window.spots = OctopusSkin.spots(svg);
 
-  skin.setColor(OctopusSkin.color());
-  spots.setColor(OctopusSkin.color());
-  spots.setStrokeColor(OctopusSkin.color());
+  var skinColor = OctopusSkin.color();
+  skin.style('fill', skinColor.hex);
+  spots.style('fill', skinColor.opposite().hex);
 
   // var colorStart;
   // var colorCycle = 20000;

@@ -2,6 +2,8 @@
 
   window.OctopusSkin.spot = spot;
 
+  spot.getPath = getPath;
+
   var defaults = {
     radius: 20,
     segments: 12,
@@ -47,15 +49,12 @@
     var el = svg.append('path')
         .attr('stroke', 'black')
         .attr('fill', 'transparent')
-        .attr('d', getPath(points, segments));
+        .attr('d', getPath(points, segments))
+        .data([{
+          getPath: getPath.bind(null, points, segments)
+        }]);
 
-    return {
-      el: el,
-      resize: resize.bind(null, el, points, segments),
-      setColor: setColor.bind(null, el),
-      setStrokeWidth: setStrokeWidth.bind(null, el),
-      setStrokeColor: setStrokeColor.bind(null, el)
-    };
+    return el;
   }
 
   function polarToCart(distance, angle) {
@@ -124,21 +123,5 @@
   function scalePoint(x, y, size) {
     var polar = cartToPolar(x, y);
     return polarToCart(polar.distance * size, polar.angle);
-  }
-
-  function resize(el, points, segments, size) {
-    return el.attr('d', getPath(points, segments, size));
-  }
-
-  function setColor(el, color) {
-    return el.attr('fill', color.hex);
-  }
-
-  function setStrokeWidth(el, width) {
-    return el.attr('stroke-width', width);
-  }
-
-  function setStrokeColor(el, color) {
-    return el.attr('stroke', color.hex);
   }
 })();
