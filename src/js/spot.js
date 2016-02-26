@@ -53,7 +53,8 @@
       el: el,
       resize: resize.bind(null, el, points, segments),
       setColor: setColor.bind(null, el),
-      setStrokeWidth: setStrokeWidth.bind(null, el)
+      setStrokeWidth: setStrokeWidth.bind(null, el),
+      setStrokeColor: setStrokeColor.bind(null, el)
     };
   }
 
@@ -135,5 +136,9 @@
 
   function setStrokeWidth(el, width) {
     return el.attr('stroke-width', width);
+  }
+
+  function setStrokeColor(el, color) {
+    return el.attr('stroke', color.hex);
   }
 })();

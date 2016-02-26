@@ -15,6 +15,7 @@
 
   skin.setColor(OctopusSkin.color());
   spots.setColor(OctopusSkin.color());
+  spots.setStrokeColor(OctopusSkin.color());
 
   // var colorStart;
   // var colorCycle = 20000;

@@ -86,7 +86,8 @@
       arr: arr,
       setColor: setColor.bind(null, arr),
       setSize: setSize.bind(null, arr),
-      setStrokeWidth: setStrokeWidth.bind(null, arr)
+      setStrokeWidth: setStrokeWidth.bind(null, arr),
+      setStrokeColor: setStrokeColor.bind(null, arr)
     }
   }
 
@@ -185,6 +186,12 @@
   function setStrokeWidth(arr, width) {
     return arr.map(function(spot) {
       return spot.setStrokeWidth(width);
+    });
+  };
+
+  function setStrokeColor(arr, color) {
+    return arr.map(function(spot) {
+      return spot.setStrokeColor(color);
     });
   };
 })();
