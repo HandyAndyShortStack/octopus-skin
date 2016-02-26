@@ -2,8 +2,6 @@
 
   window.OctopusSkin.spot = spot;
 
-  spot.getPath = getPath;
-
   var defaults = {
     radius: 20,
     segments: 12,
